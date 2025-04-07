@@ -1,13 +1,13 @@
-import { client } from "./client";
+import { clientConfig } from ".";
 
 export const logger = {
   debug: (message: string, ...args: any[]) => {
-    if (client.debug) {
+    if (clientConfig.debug) {
       console.debug(`[Tapback] ${message}`, ...args);
     }
   },
   info: (message: string, ...args: any[]) => {
-    if (client.debug) {
+    if (clientConfig.debug) {
       console.info(`[Tapback] ${message}`, ...args);
     }
   },

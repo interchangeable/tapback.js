@@ -9,7 +9,14 @@
     "resolveJsonModule": true,
     "declaration": false,
     "outDir": "dist/",
-    "lib": ["es7", "dom"]
+    "lib": ["es7", "dom"],
+    "baseUrl": "./src",
+    "paths": {
+      "@client": ["api/client/index.ts"],
+      "@client/*": ["api/client/*"],
+      "@notification": ["api/notification/index.ts"],
+      "@notification/*": ["api/notification/*"]
+    }
   },
   "include": ["src/"]
 }

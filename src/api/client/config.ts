@@ -1,4 +1,4 @@
-export let client: ClientConfig = {
+export let config: ClientConfig = {
   debug: false,
 };
 
@@ -7,5 +7,5 @@ export type ClientConfig = {
 };
 
 export const setClientConfig = (config: ClientConfig) => {
-  client = config;
+  config = config;
 };

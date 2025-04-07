@@ -1,6 +1,5 @@
-import { pushSupported } from ".";
-import { logger } from "../client/logger";
-import { ApiResponse, request } from "../client/request";
+import { pushSupported } from "@notification";
+import { logger, ApiResponse, request } from "@client";
 
 /**
  * Unsubscribe from push notifications

@@ -1,7 +1,6 @@
-import { pushSupported } from ".";
-import { logger } from "../client/logger";
-import { ApiResponse, request } from "../client/request";
-import { requestPushPermission } from "./requestPushPermission";
+import { pushSupported } from "@notification";
+import { requestPushPermission } from "@notification/requestPushPermission";
+import { logger, ApiResponse, request } from "@client";
 
 export type PushSubscriptionData = {
   endpoint: string;
