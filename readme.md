@@ -58,19 +58,3 @@ async function unsubscribe() {
   }
 }
 ```
-
-## Service Worker
-
-The API requires a service worker file to be placed at the root of your project's public directory:
-
-`public/notification-service-worker.js`
-
-The service worker is automatically registered when subscribing to push notifications.
-
-## API Reference
-
-For full API documentation, see [API.md](./API.md).
-
-## License
-
-MIT

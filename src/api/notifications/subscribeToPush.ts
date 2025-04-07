@@ -48,8 +48,6 @@ export async function subscribeToPush(
       // Get application server key from backend
       const response = await request<{ publicKey: string }>("/vapidPublicKey");
 
-      console.log(response);
-
       if (!response.data) {
         throw new Error("Failed to get VAPID public key");
       }
