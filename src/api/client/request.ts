@@ -1,4 +1,4 @@
-import { logger } from ".";
+import { logger } from "@client";
 
 export interface ApiResponse<T = any> {
   data?: T;
