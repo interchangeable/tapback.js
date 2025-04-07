@@ -17,12 +17,16 @@ npm install tapback.js
 ```typescript
 import { Tapback } from 'tabpack.js';
 
-// Configure the API
+// Configure the Client
 Tapback.Client.setClientConfig({
-  baseUrl: '/api',
-  apiKey: 'your-api-key',
   debug: true
 });
+
+// Configure the Api
+Tapback.Client.setApiConfig({
+  baseUrl: '/api',
+  apiKey: 'your-api-key'
+})
 ```
 
 ### Push Notifications
