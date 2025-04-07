@@ -23,6 +23,7 @@ export const Tapback = {
   },
 };
 
+// @ts-ignore
 window.Tapback = Tapback;
 
 export type { PushPermissionStatus } from "./notifications";
