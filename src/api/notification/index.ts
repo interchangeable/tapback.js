@@ -1,7 +1,8 @@
-import { requestPushPermission } from "@notification/requestPushPermission";
-import { checkPushPermission } from "@notification/checkPushPersmission";
-import { subscribeToPush } from "@notification/subscribeToPush";
-import { unsubscribeFromPush } from "@notification/unsubscribeFromPush";
+import { checkPushPermission } from "./checkPushPersmission";
+import { requestPushPermission } from "./requestPushPermission";
+import { subscribeToPush } from "./subscribeToPush";
+import { testNotification } from "./testNotification";
+import { unsubscribeFromPush } from "./unsubscribeFromPush";
 
 // Types for push notifications
 export type PushPermissionStatus =
@@ -27,5 +28,6 @@ export {
   checkPushPermission,
   requestPushPermission,
   subscribeToPush,
+  testNotification,
   unsubscribeFromPush,
 };

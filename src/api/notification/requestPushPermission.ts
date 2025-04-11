@@ -1,5 +1,5 @@
-import { PushPermissionStatus, pushSupported } from "@notification";
-import { logger } from "@client";
+import { PushPermissionStatus, pushSupported } from "../notification";
+import { logger } from "../client";
 
 /**
  * Request permission for push notifications

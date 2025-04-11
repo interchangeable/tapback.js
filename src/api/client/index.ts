@@ -1,6 +1,6 @@
-import { setClientConfig, config } from "@client/config";
-import { request, setApiConfig, ApiResponse } from "@client/request";
-import { logger } from "@client/logger";
+import { setClientConfig, config } from "./config";
+import { request, setApiConfig } from "./request";
+import { logger } from "./logger";
 
 export {
   setClientConfig,
@@ -9,5 +9,3 @@ export {
   config as clientConfig,
   logger,
 };
-
-export type { ApiResponse };

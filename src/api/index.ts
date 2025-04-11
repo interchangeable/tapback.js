@@ -1,15 +1,15 @@
-// src/api/index.ts
 import {
   checkPushPermission,
   requestPushPermission,
   subscribeToPush,
+  testNotification,
   unsubscribeFromPush,
-} from "@notification";
+} from "./notification";
 
-import { setClientConfig, setApiConfig } from "@client";
+import { setClientConfig, setApiConfig } from "./client";
 
 // Main Type Export
-export type { PushPermissionStatus } from "@notification";
+export type { PushPermissionStatus } from "./notification";
 
 // Main API export
 export const Tapback = {
@@ -17,6 +17,7 @@ export const Tapback = {
     checkPushPermission,
     requestPushPermission,
     subscribeToPush,
+    testNotification,
     unsubscribeFromPush,
   },
   Client: {

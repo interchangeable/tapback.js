@@ -1,5 +1,5 @@
-import { pushSupported } from "@notification";
-import { logger, ApiResponse, request } from "@client";
+import { pushSupported } from "../notification";
+import { logger, ApiResponse, request } from "../client";
 
 /**
  * Unsubscribe from push notifications
@@ -27,7 +27,7 @@ export async function unsubscribeFromPush(): Promise<ApiResponse> {
     if (result) {
       // Notify backend
       const endpoint = subscription.endpoint;
-      const res = await request("/push/subscriptions", {
+      const res = await request("/register", {
         method: "DELETE",
         body: { endpoint },
       });

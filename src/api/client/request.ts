@@ -1,9 +1,4 @@
-import { logger } from "@client";
-
-export interface ApiResponse<T = any> {
-  data?: T;
-  error?: string;
-}
+import { logger } from "../client";
 
 // Configuration options
 export interface ApiConfig {
@@ -13,7 +8,7 @@ export interface ApiConfig {
 
 const config: ApiConfig = {
   baseUrl: "http://localhost:3000",
-  apiKey: "do-i-even-need-this",
+  apiKey: null,
 };
 
 export const setApiConfig = (opts: ApiConfig) => {
@@ -35,7 +30,7 @@ export async function request<T = any>(
     body?: any;
     headers?: Record<string, string>;
   } = {},
-): Promise<ApiResponse<T>> {
+) {
   try {
     const { method = "GET", body, headers = {} } = options;
 
@@ -64,11 +59,7 @@ export async function request<T = any>(
       throw new Error(`API request failed: ${response.status} ${errorText}`);
     }
 
-    const data = await response.json();
-
-    return {
-      data,
-    };
+    return response;
   } catch (error) {
     logger.error("API request error:", error);
     return {

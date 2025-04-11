@@ -1,6 +1,6 @@
-import { pushSupported } from "@notification";
-import { requestPushPermission } from "@notification/requestPushPermission";
-import { logger, ApiResponse, request } from "@client";
+import { pushSupported } from "../notification";
+import { requestPushPermission } from "../notification/requestPushPermission";
+import { logger, request } from "../client";
 
 export type PushSubscriptionData = {
   endpoint: string;
@@ -19,9 +19,7 @@ export type PushSubscriptionData = {
  * @param tags Optional tags to categorize this subscription
  * @returns Promise with the subscription data
  */
-export async function subscribeToPush(
-  tags: string[] = [],
-): Promise<ApiResponse<PushSubscriptionData>> {
+export async function subscribeToPush(tags: string[] = []) {
   if (!pushSupported()) {
     return {
       error: "Push notifications are not supported in this browser",
@@ -47,11 +45,7 @@ export async function subscribeToPush(
       // Get application server key from backend
       const response = await request<{ publicKey: string }>("/vapidPublicKey");
 
-      if (!response.data) {
-        throw new Error("Failed to get VAPID public key");
-      }
-
-      const publicKey = response.data.publicKey;
+      const publicKey = await response.text();
       const options: PushSubscriptionOptionsInit = {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicKey),
@@ -60,25 +54,25 @@ export async function subscribeToPush(
       subscription = await registration.pushManager.subscribe(options);
     }
 
-    // Convert subscription to our format
-    const subscriptionData: PushSubscriptionData = {
-      endpoint: subscription.endpoint,
-      expirationTime: subscription.expirationTime,
-      keys: {
-        p256dh: arrayBufferToBase64(
-          subscription.getKey("p256dh") as ArrayBuffer,
-        ),
-        auth: arrayBufferToBase64(subscription.getKey("auth") as ArrayBuffer),
+    const body = {
+      subscription: {
+        endpoint: subscription.endpoint,
+        expirationTime: subscription.expirationTime,
+        keys: {
+          p256dh: arrayBufferToBase64(
+            subscription.getKey("p256dh") as ArrayBuffer,
+          ),
+          auth: arrayBufferToBase64(subscription.getKey("auth") as ArrayBuffer),
+        },
+        userAgent: navigator.userAgent,
+        createdAt: Date.now(),
+        tags,
       },
-      userAgent: navigator.userAgent,
-      createdAt: Date.now(),
-      tags,
     };
-
     // Send subscription to backend
-    const result = await request<PushSubscriptionData>("/push/subscriptions", {
+    const result = await request("/register", {
       method: "POST",
-      body: subscriptionData,
+      body,
     });
 
     return result;
@@ -97,7 +91,7 @@ export async function subscribeToPush(
  * Register the service worker needed for push notifications
  */
 async function registerServiceWorker(): Promise<ServiceWorkerRegistration> {
-  const swPath = "/notification-service-worker.js";
+  const swPath = "/service-worker.js";
 
   try {
     return await navigator.serviceWorker.register(swPath);

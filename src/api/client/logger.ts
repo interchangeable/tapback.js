@@ -1,4 +1,4 @@
-import { clientConfig } from "@client";
+import { clientConfig } from "../client";
 
 export const logger = {
   debug: (message: string, ...args: any[]) => {

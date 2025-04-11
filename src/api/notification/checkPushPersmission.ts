@@ -1,4 +1,4 @@
-import { PushPermissionStatus, pushSupported } from "@notification";
+import { PushPermissionStatus, pushSupported } from "../notification";
 
 /**
  * Get the current push notification permission status
